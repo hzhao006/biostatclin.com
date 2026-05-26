@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BioStatClin LLC — Your trusted CRO partner for comprehensive statistical support in clinical trials, Phase I through Phase III.">
+<meta name="keywords" content="biostatistics, clinical trials, CRO, statistical analysis, SAP, SDTM, ADaM, FDA, oncology, infectious disease">
+<title>BioStatClin LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #122040;
+    --teal: #1a9e8f;
+    --teal-light: #e3f5f3;
+    --gold: #c8a96e;
+    --white: #fafaf8;
+    --text: #1a1a2e;
+    --muted: #5a6070;
+    --border: rgba(26,158,143,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,22,40,0.96);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem; height: 70px;
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.72); font-size: 0.85rem; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--teal); color: #fff; border: none;
+    padding: 0.5rem 1.4rem; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #158a7c; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 0 4rem;
+    position: relative; overflow: hidden;
+    padding-top: 70px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -5%;
+    width: 55%; height: 130%;
+    background: linear-gradient(135deg, #122040 0%, #0d2d4a 50%, #0a3d3a 100%);
+    transform: skewX(-6deg);
+    border-left: 1px solid rgba(26,158,143,0.3);
+  }
+  .hero-grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(26,158,143,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,158,143,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+  .hero-eyebrow span {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 300; line-height: 1.12;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero p {
+    font-size: 1rem; color: rgba(255,255,255,0.62);
+    max-width: 440px; line-height: 1.75; margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--teal); color: #fff;
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    letter-spacing: 0.04em; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #158a7c; transform: translateY(-1px); }
+  .btn-secondary {
+    color: rgba(255,255,255,0.65); font-size: 0.88rem;
+    text-decoration: none; letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--white); }
+  .btn-secondary::after { content: '→'; transition: transform 0.2s; }
+  .btn-secondary:hover::after { transform: translateX(4px); }
+
+  .hero-stats {
+    position: absolute; bottom: 3rem; left: 4rem; right: 50%;
+    display: flex; gap: 3rem; z-index: 2;
+  }
+  .hero-stat strong {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 500; color: var(--white); line-height: 1;
+  }
+  .hero-stat span {
+    font-size: 0.75rem; color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-card-stack { position: relative; width: 340px; height: 320px; }
+  .phase-card {
+    position: absolute; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .phase-card:nth-child(1) { top: 0; left: 0; right: 40px; }
+  .phase-card:nth-child(2) {
+    top: 80px; left: 20px; right: 20px;
+    background: rgba(26,158,143,0.1); border-color: rgba(26,158,143,0.3);
+  }
+  .phase-card:nth-child(3) { top: 160px; left: 40px; right: 0; }
+  .phase-label {
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 0.4rem;
+  }
+  .phase-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+    color: var(--white); font-weight: 400;
+  }
+  .phase-desc { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; }
+
+  /* ABOUT */
+  .about {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem;
+    align-items: start;
+  }
+  .section-label {
+    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+  }
+  .section-label-line { width: 32px; height: 1px; background: var(--teal); }
+  .section-label span {
+    font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal);
+  }
+  .about h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.2;
+    color: var(--navy); margin-bottom: 1.5rem;
+  }
+  .about p { font-size: 0.97rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+  .ta-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-light); border: 1px solid rgba(26,158,143,0.2);
+    border-radius: 4px; padding: 0.4rem 0.9rem; margin-top: 0.5rem;
+    font-size: 0.82rem; color: var(--teal); letter-spacing: 0.04em;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border); border: 1px solid var(--border);
+  }
+  .service-item {
+    background: var(--white); padding: 1.25rem 1.5rem;
+    font-size: 0.88rem; color: var(--text);
+    display: flex; align-items: flex-start; gap: 0.65rem;
+    transition: background 0.15s;
+  }
+  .service-item:hover { background: var(--teal-light); }
+  .service-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--teal); flex-shrink: 0; margin-top: 0.45rem;
+  }
+
+  /* WHY */
+  .why {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  .why::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(circle at 80% 20%, rgba(26,158,143,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(200,169,110,0.05) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .why-header { text-align: center; margin-bottom: 4rem; position: relative; }
+  .why .section-label { justify-content: center; }
+  .why h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300;
+    color: var(--white); line-height: 1.2;
+  }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    position: relative;
+  }
+  .why-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 2rem 1.75rem;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .why-card:hover {
+    border-color: rgba(26,158,143,0.5);
+    background: rgba(26,158,143,0.05);
+  }
+  .why-icon {
+    width: 44px; height: 44px; border-radius: 8px;
+    background: rgba(26,158,143,0.15); border: 1px solid rgba(26,158,143,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--teal);
+  }
+  .why-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 500; color: var(--white); margin-bottom: 0.75rem;
+  }
+  .why-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.75; }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--teal-light);
+    border-top: 1px solid rgba(26,158,143,0.2);
+    border-bottom: 1px solid rgba(26,158,143,0.2);
+  }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .contact-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400;
+    color: var(--navy); margin-bottom: 1rem;
+  }
+  .contact-section p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input, .contact-form textarea {
+    background: #fff; border: 1px solid rgba(26,158,143,0.25);
+    border-radius: 6px; padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: var(--text);
+    outline: none; transition: border-color 0.2s; resize: none;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--teal); }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: #aaa; }
+  .contact-form textarea { height: 110px; }
+  .contact-form button {
+    background: var(--navy); color: #fff; border: none;
+    padding: 0.9rem; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s;
+  }
+  .contact-form button:hover { background: var(--navy-mid); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.4);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.82rem;
+  }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+    color: rgba(255,255,255,0.7); font-weight: 500; letter-spacing: 0.03em;
+  }
+  .footer-logo span { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * { animation: fadeUp 0.7s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.10s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.40s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.55s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero-visual { display: none; }
+    .hero-stats { left: 1.5rem; right: 1.5rem; bottom: 2rem; }
+    .about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#hero" class="nav-logo">BioStat<span>Clin</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Contract Research Organization</span>
+    </div>
+    <h1>Statistical excellence<br>for <em>clinical trials</em></h1>
+    <p>From Phase I through Phase III, BioStatClin delivers rigorous biostatistics and data science solutions that accelerate your path to regulatory approval.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a conversation</a>
+      <a href="#services" class="btn-secondary">View services</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="phase-card">
+        <div class="phase-label">Phase I–II</div>
+        <div class="phase-title">Study Design &amp; Protocol</div>
+        <div class="phase-desc">Sample size, endpoints, adaptive design</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Phase II–III</div>
+        <div class="phase-title">Statistical Analysis Plans</div>
+        <div class="phase-desc">SAP, SDTM/ADaM datasets, DMC services</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Regulatory Submission</div>
+        <div class="phase-title">ISS / ISE / CSR Reporting</div>
+        <div class="phase-desc">Tables, listings, figures &amp; integrated analyses</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>I–III</strong><span>Trial Phases</span></div>
+    <div class="hero-stat"><strong>FDA</strong><span>Compliant</span></div>
+    <div class="hero-stat"><strong>Oncology</strong><span>+ Infectious Disease</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div>
+    <div class="section-label">
+      <div class="section-label-line"></div>
+      <span>Who We Are</span>
+    </div>
+    <h2>Dedicated statistical support across every trial phase</h2>
+    <p>BioStatClin is a specialized Contract Research Organization focused exclusively on comprehensive statistical support for clinical trials. We partner with pharmaceutical and biotech companies to drive every stage — from study design through regulatory submission.</p>
+    <p>Our team of experienced statisticians brings deep expertise in regulatory guidelines and cutting-edge statistical methodologies, ensuring your trials are designed for success.</p>
+    <div><span class="ta-badge">&#9877; Infectious Disease &amp; Oncology</span></div>
+  </div>
+
+  <div id="services">
+    <div class="section-label">
+      <div class="section-label-line"></div>
+      <span>Our Services</span>
+    </div>
+    <div class="services-grid">
+      <div class="service-item"><div class="service-dot"></div>Study design &amp; protocol development</div>
+      <div class="service-item"><div class="service-dot"></div>Strategic statistical consulting</div>
+      <div class="service-item"><div class="service-dot"></div>Endpoint &amp; sample size analysis</div>
+      <div class="service-item"><div class="service-dot"></div>Randomization schemes</div>
+      <div class="service-item"><div class="service-dot"></div>Statistical analysis plans (SAP)</div>
+      <div class="service-item"><div class="service-dot"></div>Adaptive design &amp; simulation</div>
+      <div class="service-item"><div class="service-dot"></div>Tables, listings &amp; figures (TLF)</div>
+      <div class="service-item"><div class="service-dot"></div>eCRF design &amp; review</div>
+      <div class="service-item"><div class="service-dot"></div>ISS / ISE / ISM analyses</div>
+      <div class="service-item"><div class="service-dot"></div>Data Monitoring Committee (DMC)</div>
+      <div class="service-item"><div class="service-dot"></div>SDTM &amp; ADaM dataset preparation</div>
+      <div class="service-item"><div class="service-dot"></div>Submission-ready dataset packages</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="why-header">
+    <div class="section-label">
+      <div class="section-label-line" style="background:var(--teal)"></div>
+      <span style="color:var(--teal)">Why BioStatClin</span>
+    </div>
+    <h2>The right statistical partner<br>for complex clinical science</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">&#128302;</div>
+      <h3>Deep Experience</h3>
+      <p>Years of hands-on expertise in pharmaceutical and biotech trials means we understand the unique challenges your team faces every day.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">&#128208;</div>
+      <h3>Methodology Expertise</h3>
+      <p>Our statisticians stay current with the latest statistical advances and evolving regulatory guidelines, from FDA to ICH E9(R1).</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">&#127919;</div>
+      <h3>Tailored Solutions</h3>
+      <p>We don't do one-size-fits-all. Every engagement is structured around the specific goals, design, and constraints of your trial.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">&#9989;</div>
+      <h3>Regulatory Compliance</h3>
+      <p>We maintain the highest quality standards and stay aligned with regulatory requirements to help you navigate submission confidently.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">&#9201;</div>
+      <h3>On-Time Delivery</h3>
+      <p>Clinical timelines don't wait. We are committed to meeting every milestone without sacrificing the rigor your trial demands.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">&#129309;</div>
+      <h3>True Partnership</h3>
+      <p>We operate as an extension of your team — transparent, communicative, and invested in the scientific and clinical success of your work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span>Contact Us</span>
+      </div>
+      <h2>Ready to elevate your clinical trial statistics?</h2>
+      <p>Partner with BioStatClin and bring rigorous statistical analysis to your next trial. Reach out to discuss how we can collaborate and make a meaningful impact on the future of healthcare.</p>
+      <p style="margin-top:1.5rem">
+        <a href="mailto:info@biostatclin.com" style="color:var(--teal);font-weight:500;font-size:1rem;">info@biostatclin.com</a>
+      </p>
+    </div>
+    <div>
+      <form class="contact-form" id="contact-form" action="mailto:info@biostatclin.com" method="post" enctype="text/plain">
+        <input type="text"  name="name"    placeholder="Your name"            required />
+        <input type="email" name="email"   placeholder="Company email"        required />
+        <input type="text"  name="company" placeholder="Company / Organization" />
+        <textarea           name="message" placeholder="Tell us about your trial and how we can help&#8230;" required></textarea>
+        <button type="submit" id="form-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">BioStat<span>Clin</span> LLC</div>
+  <div>&copy; 2024 BioStatClin LLC. All rights reserved.</div>
+  <div><a href="mailto:info@biostatclin.com">info@biostatclin.com</a></div>
+</footer>
+
+<script>
+  /* Smooth scroll for all anchor links */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  /* Nav background intensity on scroll */
+  window.addEventListener('scroll', function() {
+    var nav = document.querySelector('nav');
+    if (window.scrollY > 40) {
+      nav.style.background = 'rgba(10,22,40,0.99)';
+    } else {
+      nav.style.background = 'rgba(10,22,40,0.96)';
+    }
+  });
+
+  /* Scroll-triggered fade-in for sections */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.why-card, .service-item').forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
